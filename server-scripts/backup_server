@@ -1,0 +1,26 @@
+#!/bin/sh
+
+function compare() {
+    return $? == 0
+}
+
+if [ "$BACKUPS_ENABLED" == "true" ]
+then
+
+mc-monitor status --host localhost --port 35000
+
+if compare
+then
+    # echo Online
+    screen -S server -p 0 -X stuff "say [BACKUP] Salvando o mundo (esta operação poderá demorar algum tempo...)^M" 
+    screen -S server -p 0 -X stuff "save-all^M"
+    screen -S server -p 0 -X stuff "say [BACKUP] Mundo salvo, iniciando o backup para ficheiro...^M"  
+    screen -S server -p 0 -X stuff "save-off^M"
+    tar -czf "/destiny-i/backups/Backup - Destiny I - `date +%m-%d-%Y` at `date +%T`.tar.gz" /destiny-i/server/world
+    screen -S server -p 0 -X stuff "say [BACKUP] Backup concluído com sucesso^M"  
+    screen -S server -p 0 -X stuff "save-on^M"
+fi
+
+else
+    exit 0
+fi

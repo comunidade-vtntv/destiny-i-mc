@@ -1,0 +1,37 @@
+#!/bin/sh
+if [ -e /destiny-i/server-config/server.properties ]
+then
+    ln -s /destiny-i/server-config/server.properties /destiny-i/server/server.properties
+else
+    echo -e "rcon.port=35001\nquery.port=35000\nserver-port=35000\nenable-status=true\nenable-query=true\nonline-mode=$ONLINE_MODE\nmax-players=$MAX_PLAYERS\nenable-rcon=$RCON_ENABLED\nrcon.password=$RCON_PASSWORD\ndifficulty=$DIFFICULTY\ngamemode=$GAMEMODE\nlevel-type=$LEVEL_TYPE" > /destiny-i/server-config/server.properties
+    ln -s /destiny-i/server-config/server.properties /destiny-i/server/server.properties
+fi
+
+if [ -e /destiny-i/server-config/banned-ips.json ]
+then
+    ln -s /destiny-i/server-config/banned-ips.json /destiny-i/server/banned-ips.json
+else
+    echo "[]" > /destiny-i/server-config/banned-ips.json
+    ln -s /destiny-i/server-config/banned-ips.json /destiny-i/server/banned-ips.json
+fi
+if [ -e /destiny-i/server-config/banned-players.json ]
+then
+    ln -s /destiny-i/server-config/banned-ips.json /destiny-i/server/banned-players.json
+else
+    echo "[]" > /destiny-i/server-config/banned-players.json
+    ln -s /destiny-i/server-config/banned-ips.json /destiny-i/server/banned-players.json
+fi
+if [ -e /destiny-i/server-config/ops.json ]
+then
+    ln -s /destiny-i/server-config/ops.json /destiny-i/server/ops.json
+else
+    echo "[]" > /destiny-i/server-config/ops.json
+    ln -s /destiny-i/server-config/ops.json /destiny-i/server/ops.json
+fi
+if [ -e /destiny-i/server-config/whitelist.json ]
+then
+    ln -s /destiny-i/server-config/whitelist.json /destiny-i/server/whitelist.json
+else
+    echo "[]" > /destiny-i/server-config/whitelist.json
+    ln -s /destiny-i/server-config/whitelist.json /destiny-i/server/whitelist.json
+fi

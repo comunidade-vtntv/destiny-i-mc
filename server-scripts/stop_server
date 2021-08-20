@@ -1,0 +1,29 @@
+#!/bin/sh
+ if pgrep -x "java" >/dev/null
+    then
+            screen -S server -p 0 -X stuff "say Parando em 1 minuto^M" 
+            sleep 30
+            screen -S server -p 0 -X stuff "say Parando em 30 segundos^M" 
+            sleep 15
+            screen -S server -p 0 -X stuff "say Parando em 15 segundos^M" 
+            sleep 10
+            screen -S server -p 0 -X stuff "say Parando em 5 segundos^M" 
+            sleep 1
+            screen -S server -p 0 -X stuff "say Parando em 4 segundos^M" 
+            sleep 1
+            screen -S server -p 0 -X stuff "say Parando em 3 segundos^M" 
+            sleep 1
+            screen -S server -p 0 -X stuff "say Parando em 2 segundos^M" 
+            sleep 1
+            screen -S server -p 0 -X stuff "say Parando em 1 segundos^M" 
+            sleep 1
+            screen -S server -p 0 -X stuff "say Parando agora^M" 
+            sleep 1
+            screen -S server -p 0 -X stuff "stop^M"
+            while screen -list | grep -q server
+            do
+                sleep 1
+            done
+            touch stop.action 
+fi
+

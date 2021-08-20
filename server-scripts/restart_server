@@ -1,0 +1,25 @@
+#!/bin/sh
+screen -S server -p 0 -X stuff "say Reiniciando em 1 minuto^M" 
+sleep 30
+screen -S server -p 0 -X stuff "say Reiniciando em 30 segundos^M" 
+sleep 15
+screen -S server -p 0 -X stuff "say Reiniciando em 15 segundos^M" 
+sleep 10
+screen -S server -p 0 -X stuff "say Reiniciando em 5 segundos^M" 
+sleep 1
+screen -S server -p 0 -X stuff "say Reiniciando em 4 segundos^M" 
+sleep 1
+screen -S server -p 0 -X stuff "say Reiniciando em 3 segundos^M" 
+sleep 1
+screen -S server -p 0 -X stuff "say Reiniciando em 2 segundos^M" 
+sleep 1
+screen -S server -p 0 -X stuff "say Reiniciando em 1 segundos^M" 
+sleep 1
+screen -S server -p 0 -X stuff "say Reiniciando agora^M" 
+sleep 1
+screen -S server -p 0 -X stuff "stop^M"
+while screen -list | grep -q server
+do
+    sleep 1
+done
+touch restart.action 

@@ -1,0 +1,4 @@
+#!/bin/sh
+./stop_server
+./uninstall_server
+./install_server

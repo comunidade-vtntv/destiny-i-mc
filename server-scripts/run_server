@@ -1,0 +1,84 @@
+#!/bin/sh
+echo "*********************************************************************************************************************"
+echo "*                                                                                                                   "
+echo "*                                          Destiny I - 1.0 by Destiny Team                                          "
+echo "*                                                                                                                   "
+echo "* Server Environment:                                                                                               "
+echo "* Minecraft: 1.16.5                                                                                                 "
+echo "* Forge: 36.1.32                                                                                                    "
+echo "* Mods Loaded: 26                                                                                                   "
+echo "*                                                                                                                   "
+echo "* Variables:                                                                                                        "
+echo "* Alocated RAM: $RAM                                                                                                "
+if [ "$RCON_ENABLED" == "true" ]
+then
+    echo "* RCON Password: $RCON_PASSWORD                                                                                 "
+fi
+echo "*                                                                                                                   "
+echo "* Ports:                                                                                                            "
+echo "* 35000/tcp - Server Port (necessary to play, ensure that server.properties binds to this port)                     "
+echo "* 35000/udp - Server Query Port (not necessary to play, if used ensure that server.properties query                 "
+echo "*             binds to this port)                                                                                   "
+echo "* 35001/tcp - Server RCON Port (if you want to manage server remotely, ensure that server.properties                "
+echo "*             RCON binds to this port and enable them using the environment)                                        "
+echo "* 35002/tcp - Mekanism Voice Port (if you want voice comunication ingame, ensure that mekanism voice                "
+echo "*             config binds to this port and external network too)                                                   "
+echo "*                                                                                                                   "
+echo "* Mountpoints/Volumes:                                                                                              "
+echo "* /destiny-i/server/world - World folder                                                                            "
+echo "* /destiny-i/server-config - server.properties / ops.json / whitelist.json / banned-ips.json /banned-players.json   "
+echo "* /destiny-i/server/logs - Logs folder                                                                              "
+echo "* /destiny-i/backups - World Backups folder                                                                         "
+echo "*                                                                                                                   "
+echo "*********************************************************************************************************************"
+
+./configure_server
+
+function stopserverdata {
+    screen -S server -p 0 -X stuff "stop^M"
+    while screen -list | grep -q server
+    do
+        sleep 1
+    done
+    exit 0
+}
+
+
+function processserver {
+    
+    if [ -e restart.action ]
+    then
+        echo "Restarting server as requested by user... "
+        rm restart.action
+        screen -dmS server java -Xms$RAM -Xmx$RAM -jar server.jar --nogui
+        sleep 5
+    elif [ -e stop.action ]
+    then
+        echo "Stopping server as requested by user... "
+        rm stop.action
+        exit 0
+    else
+        SERVICE="java"
+        if pgrep -x "$SERVICE" >/dev/null
+        then
+            sleep 1
+        else
+            screen -wipe >/dev/null
+            echo "Restarting server (probably console stopped/started/crashed)... "
+            screen -dmS server java -Xms$RAM -Xmx$RAM -jar server.jar --nogui
+            sleep 5
+        fi
+    fi
+
+   
+    
+    
+}
+
+trap stopserverdata 15
+
+while true
+do
+    processserver
+done
+

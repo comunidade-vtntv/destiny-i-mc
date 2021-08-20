@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mc-monitor status --host localhost --port 35000
+exit $?

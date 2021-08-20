@@ -1,0 +1,27 @@
+#!/bin/sh
+
+addgroup \
+    -g $GID \
+    $GROUP 
+    
+
+adduser \
+    --disabled-password \
+    --gecos "" \
+    --ingroup "$GROUP" \
+    --no-create-home \
+    --uid "$UID" \
+    "$USER"
+
+mkdir /destiny-i/server-config
+mkdir /destiny-i/server/world
+mkdir /destiny-i/server/logs
+mkdir /destiny-i/backups
+chown -R "$USER":"$GROUP" /destiny-i 
+chmod -R 777 /destiny-i
+chmod -R g+s /destiny-i
+
+apk add --no-cache screen
+chmod +x /bin/install_server
+
+su -c "install_server" "$USER"

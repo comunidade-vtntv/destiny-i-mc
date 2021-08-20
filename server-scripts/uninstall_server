@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo "Starting Destiny I Uninstallation..."
+echo
+./stop_server
+echo "[1/1] Removing server jars and libraries"
+rm -rf libraries 1.16.5.json server.jar minecraft_server.1.16.5.jar
+echo
+echo "Server Uninstallation Complete"
