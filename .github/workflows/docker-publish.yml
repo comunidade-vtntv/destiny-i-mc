@@ -18,6 +18,11 @@ on:
       - dev
       - latest
 
+permissions:
+  contents: read
+  pull-requests: read
+  packages: write
+
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
