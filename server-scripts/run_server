@@ -1,11 +1,11 @@
 #!/bin/sh
 echo "*********************************************************************************************************************"
 echo "*                                                                                                                   "
-echo "*                                          Destiny I - 1.0 by Destiny Team                                          "
+echo "*                                          Destiny I - 1.1 by Destiny Team                                          "
 echo "*                                                                                                                   "
 echo "* Server Environment:                                                                                               "
 echo "* Minecraft: 1.16.5                                                                                                 "
-echo "* Forge: 36.1.32                                                                                                    "
+echo "* Forge: 36.2.8                                                                                                     "
 echo "* Mods Loaded: 26                                                                                                   "
 echo "*                                                                                                                   "
 echo "* Variables:                                                                                                        "

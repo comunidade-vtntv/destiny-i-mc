@@ -3,7 +3,7 @@
 echo "Starting Destiny I installation..."
 echo 
 echo "[1/4] Downloading Forge Server from official site..."
-wget -O forge_installer.jar https://maven.minecraftforge.net/net/minecraftforge/forge/1.16.5-36.1.32/forge-1.16.5-36.1.32-installer.jar && \
+wget -O forge_installer.jar https://maven.minecraftforge.net/net/minecraftforge/forge/1.16.5-36.2.8/forge-1.16.5-36.2.8-installer.jar && \
 echo "[2/4] Installing Forge Server..." && \
 java -jar forge_installer.jar --installServer && \
 echo "[3/4] Removing Forge Installer Data..." && \
